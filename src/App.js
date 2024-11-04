@@ -19,7 +19,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/countdown" />} />
           <Route path="/countdown" element={<Countdown />} />
-          {/* <Route path="/storeSpin" element={<StoreSpin />} /> */}
+          <Route path="/storeSpin" element={<StoreSpin />} />
         </Routes>
       </div>
     </Router>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import logoWO from "../assets/Logo without sine.png";
 
 const Countdown = () => {
   const navigate = useNavigate();
@@ -34,6 +35,9 @@ const Countdown = () => {
 
   return (
     <div className="count-contain text-center">
+      <div className="countdownLogo">
+        <img src={logoWO} />
+      </div>
       <div className="time">
         <h1 className="mb-4">Stay Tuned for Lucky Draw</h1>
         <div className="d-flex  justify-content-center">

@@ -9,22 +9,67 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: Archivo !important;
 }
 
 .count-contain {
-  background-image: url("./assets/01.jpg");
-  background-size: cover;
+  background-image: url("./assets/04.jpg");
+  background-size: contain;
   height: 100vh;
   color: #fff;
   object-fit: contain !important;
   background-position: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.time {
+.countdownLogo > img {
+  height: 30rem;
+}
+
+.loading-overlay {
   position: relative;
-  top: 24rem;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(6, 6, 6, 0.503);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* Prevent overflow if scrolling animation extends beyond the container */
+  z-index: 10;
+  /* Ensure it is on top of other content */
+}
+
+.loading-animation {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+}
+
+.loading-animation::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.loading-animation > * {
+  position: relative;
+  z-index: 2;
+}
+.time {
   color: #952953;
 }
 
@@ -46,47 +91,45 @@ code {
   background-color: #f8a845;
 }
 
-/* Main Container */
-.store-spin-container {
-  background-image: url("./assets/05.jpg");
-  background-size: cover;
+.parentContainer {
+  background-image: url("./assets/04.jpg");
+  background-size: contain;
   min-height: 100vh;
   height: fit-content;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
-.RM-info-container {
-  background-image: url("./assets/04.jpg"); /* Background image */
-  background-size: cover;
+/* Main Container */
+.store-spin-container {
+  flex-basis: 100%;
+  min-height: 100vh;
   height: fit-content;
-  width: 80vw;
-  padding: 40px 0px 20px 6rem;
-  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.RM_info_container {
+  flex-basis: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 80px;
+}
+
+.user-info {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  position: relative;
-  font-family: Arial, sans-serif;
-  color: #952953;
+  align-items: center;
+  height: 52%;
+  gap: 10px;
 }
 
-/* Logo */
-.logo {
-  position: absolute;
-  top: 30px;
-  right: 20px;
-  width: 13rem;
-}
-
-/* Content Section */
 .content {
   text-align: center;
   margin-top: 45px;
 }
 
-/* User Info Section */
 .user-info {
   text-align: center;
   margin-bottom: 20px;
@@ -101,7 +144,6 @@ code {
   font-size: 16px;
 }
 
-/* Profile Picture */
 .profile-pic {
   position: relative;
   width: 150px;
@@ -110,14 +152,11 @@ code {
 }
 
 .circle {
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   border: 2px solid #952953;
   background: #fff;
   border-radius: 50%;
-  position: absolute;
-  top: 0;
-  left: 0;
   box-shadow: 0px 0px 4px 0px #952953;
 }
 
@@ -130,35 +169,39 @@ code {
   left: 5px;
 }
 
-/* Stats Section */
 .stats {
   display: flex;
-  justify-content: center;
+  justify-content: top;
   margin-bottom: 20px;
+  gap: 20px;
+  flex-direction: column;
+  height: 40%;
+  width: 100%;
+  align-items: center;
 }
 
 .stat {
   background-color: #ffffff;
   border-radius: 10px;
+  height: 96px;
   padding: 0px 15px;
   text-align: center;
-  width: 100px;
+  width: 160px;
 }
 
 .stat h3 {
-  font-size: 36px;
+  font-size: 66px;
   margin: 0;
   line-height: 1;
 }
 
 .stat p {
-  font-size: 14px;
+  font-size: 17px;
   margin-top: 0px;
   margin-bottom: 0px;
   font-weight: bold;
 }
 
-/* Spin Button */
 .spin-btn {
   background-color: #12065e;
   color: #fff;
@@ -174,21 +217,79 @@ code {
 .spin-btn:hover {
   color: #952953;
   background-color: #f9f8f7;
-  /* background-color: #f8a845; */
   border: 1px solid #952953;
 }
 
-.store-manager-list {
+.storeList {
+  flex-basis: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.storeListPageLogo {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding-right: 4rem;
+}
+
+.storeListPageLogo > img {
+  width: 18rem;
+}
+
+.storeParticipantList {
+  width: 68%;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 5px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
   margin-top: 20px;
   background-color: #f9e01a; /* Light yellow background */
-  padding: 10px;
   border-radius: 10px;
-  width: 130%;
-  position: relative;
-  bottom: -120px;
-  right: -150px;
-  height: fit-content;
-  box-shadow: 0px 2px 4px 0px #12065e;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.storeParticipantListHeader {
+  text-align: center;
+  z-index: 1;
+  background-color: #f9e01a;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  height: 60px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px 0px;
+}
+
+.scrolling-content {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 95%;
+  overflow: hidden;
+  animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateY(0);
+    /* Start at the top */
+  }
+
+  100% {
+    transform: translateY(-100%);
+    /* Scroll to the top of the container height */
+  }
+}
+
+.storeParticipant {
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .list-title {
@@ -219,28 +320,213 @@ code {
   background-color: #f9f8f7;
 }
 
-/* Congratulations Section */
-/* .congratulations {
-  background-image: url('./assets/07.jpg');
-  background-size: cover;
-  padding: 20px;
-  margin-top: 20px;
-  text-align: center;
-  color: #952953;
+/***************** /Wheel Container// ***************************************/
+
+.wheelBlock {
+  flex-basis: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.congratulations p {
+.wheel-container {
+  display: flex;
+  height: 322px;
+  width: 320px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: absolute;
+  top: 142px;
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.wheels {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: conic-gradient(
+    #f6d2a2 0% 12.5%,
+    /* 1st segment (odd) */ #972235 12.5% 25%,
+    /* 2nd segment (even) */ #f6d2a2 25% 37.5%,
+    /* 3rd segment (odd) */ #972235 37.5% 50%,
+    /* 4th segment (even) */ #f6d2a2 50% 62.5%,
+    /* 5th segment (odd) */ #972235 62.5% 75%,
+    /* 6th segment (even) */ #f6d2a2 75% 87.5%,
+    /* 7th segment (odd) */ #972235 87.5% 100% /* 8th segment (even) */
+  );
+}
+
+.wheel-full {
+  background: conic-gradient(
+    #f6d2a2 0% 11.11%,
+    /* 1st segment */ #972235 11.11% 22.22%,
+    /* 2nd segment */ #f6d2a2 22.22% 33.33%,
+    /* 3rd segment */ #972235 33.33% 44.44%,
+    /* 4th segment */ #f6d2a2 44.44% 55.55%,
+    /* 5th segment */ #972235 55.55% 66.66%,
+    /* 6th segment */ #f6d2a2 66.66% 77.77%,
+    /* 7th segment */ #972235 77.77% 88.88%,
+    /* 8th segment */ #f6d2a2 88.88% 100% /* 9th segment */
+  );
+}
+
+.wheel-three {
+  /* background: conic-gradient(
+    #FDD209 0% 33.3%,
+    #94284F 33.3% 66.6%,
+    #52B688 66.6% 100%
+  ); */
+  background: conic-gradient(
+    #f6d2a2 0% 11.11%,
+    /* 1st segment */ #972235 11.11% 22.22%,
+    /* 2nd segment */ #f6d2a2 22.22% 33.33%,
+    /* 3rd segment */ #972235 33.33% 44.44%,
+    /* 4th segment */ #f6d2a2 44.44% 55.55%,
+    /* 5th segment */ #972235 55.55% 66.66%,
+    /* 6th segment */ #f6d2a2 66.66% 77.77%,
+    /* 7th segment */ #972235 77.77% 88.88%,
+    /* 8th segment */ #f6d2a2 88.88% 100% /* 9th segment */
+  );
+}
+.segment-image {
+  width: 80px; /* Adjust the size as needed */
+  height: 80px; /* Adjust the size as needed */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+/* Central white circle */
+.central-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  position: absolute; /* Center this circle */
+  background-color: #f9d60c;
+  background-image: linear-gradient(45deg, #f9d60c, #ffd700, #f9d60c);
+  animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.central-circle::before {
+  font-size: 36px;
+  color: gold;
+}
+
+/* Add spinning animation */
+.spinning {
+  animation: spiner 2s linear forwards;
+}
+
+/* Keyframes for spinning animation */
+@keyframes spiner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(9600deg);
+  }
+}
+
+.slowing {
+  animation: slowDown 5s linear forwards;
+}
+
+/* Keyframes for slowing down the spinning */
+@keyframes slowDown {
+  from {
+    transform: rotate(9600deg);
+  }
+  to {
+    transform: rotate(180deg); /* Adjust this value for a gentle slowdown */
+  }
+}
+
+.swalPopup {
+  background-image: url("./assets/07.jpg");
+  background-size: cover;
+  width: 100%;
+  height: auto;
+}
+
+#swal2-html-container {
+  padding: 3em 2.6em 0.3em !important;
+}
+
+.winner-box {
+  width: 30%;
+  height: 320px;
+  border-radius: 15px;
+  margin: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border: 2px solid #00391c;
+  overflow: hidden;
+  max-height: 200px;
+  /* Limit the height of each box */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: red;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  /* Add vertical scrollbar if content overflows */
+}
+
+.winner-header {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
+  padding: 7px;
+  background-color: #286931;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  color: #fff;
+  text-align: center;
 }
 
-.congratulations ul {
-  list-style: none;
-  padding: 0;
-  font-size: 18px;
+.winner-list {
+  font-size: 20px;
+  list-style-type: disc;
+  /* Bullet points for winner names */
+  padding-left: 20px;
+  /* Indent bullets */
+  margin: 15px;
+  max-height: 150px;
+  /* Limit the height of the list to prevent overflow */
+  overflow-y: auto;
+  overflow-y: scroll;
+  /* Allow vertical scrolling */
+  scrollbar-width: none;
+  /* For Firefox */
+  -ms-overflow-style: none;
+  /* For Internet Explorer and Edge */
 }
 
-.congratulations li {
-  margin-bottom: 5px;
-} */
+.winner-list::-webkit-scrollbar {
+  display: none;
+  /* For Chrome, Safari, and Opera */
+}
+
+.winner-container {
+  background-image: "";
+}
