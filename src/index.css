@@ -1,0 +1,246 @@
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+  font-family: Archivo !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.count-contain {
+  background-image: url("./assets/01.jpg");
+  background-size: cover;
+  height: 100vh;
+  color: #fff;
+  object-fit: contain !important;
+  background-position: center;
+}
+
+.time {
+  position: relative;
+  top: 24rem;
+  color: #952953;
+}
+
+.time-box {
+  background-color: #ffffff;
+  margin: 0.5rem;
+  border-radius: 8px;
+  color: #952953;
+  font-weight: bold;
+  align-content: center;
+  width: 90px;
+  height: 90px;
+}
+
+.navbar {
+  height: 3rem;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background-color: #f8a845;
+}
+
+/* Main Container */
+.store-spin-container {
+  background-image: url("./assets/05.jpg");
+  background-size: cover;
+  min-height: 100vh;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.RM-info-container {
+  background-image: url("./assets/04.jpg"); /* Background image */
+  background-size: cover;
+  height: fit-content;
+  width: 80vw;
+  padding: 40px 0px 20px 6rem;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  position: relative;
+  font-family: Arial, sans-serif;
+  color: #952953;
+}
+
+/* Logo */
+.logo {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  width: 13rem;
+}
+
+/* Content Section */
+.content {
+  text-align: center;
+  margin-top: 45px;
+}
+
+/* User Info Section */
+.user-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-info h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.user-info p {
+  font-size: 16px;
+}
+
+/* Profile Picture */
+.profile-pic {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 10px;
+}
+
+.circle {
+  width: 150px;
+  height: 150px;
+  border: 2px solid #952953;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: 0px 0px 4px 0px #952953;
+}
+
+.profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+/* Stats Section */
+.stats {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.stat {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 0px 15px;
+  text-align: center;
+  width: 100px;
+}
+
+.stat h3 {
+  font-size: 36px;
+  margin: 0;
+  line-height: 1;
+}
+
+.stat p {
+  font-size: 14px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
+/* Spin Button */
+.spin-btn {
+  background-color: #12065e;
+  color: #fff;
+  padding: 5px 20px;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 0px;
+}
+
+.spin-btn:hover {
+  color: #952953;
+  background-color: #f9f8f7;
+  /* background-color: #f8a845; */
+  border: 1px solid #952953;
+}
+
+.store-manager-list {
+  margin-top: 20px;
+  background-color: #f9e01a; /* Light yellow background */
+  padding: 10px;
+  border-radius: 10px;
+  width: 130%;
+  position: relative;
+  bottom: -120px;
+  right: -150px;
+  height: fit-content;
+  box-shadow: 0px 2px 4px 0px #12065e;
+}
+
+.list-title {
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.scrollable-list {
+  list-style-type: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto; /* Scrollable */
+  margin: 0;
+}
+
+.list-item {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  color: #333;
+}
+
+.scrollable-list .list-item:last-child {
+  border-bottom: none;
+}
+
+.scrollable-list .list-item:nth-child(even) {
+  background-color: #f9f8f7;
+}
+
+/* Congratulations Section */
+/* .congratulations {
+  background-image: url('./assets/07.jpg');
+  background-size: cover;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+  color: #952953;
+}
+
+.congratulations p {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.congratulations ul {
+  list-style: none;
+  padding: 0;
+  font-size: 18px;
+}
+
+.congratulations li {
+  margin-bottom: 5px;
+} */
