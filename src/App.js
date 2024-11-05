@@ -10,6 +10,7 @@ import "./App.css";
 // import Navbar from "./components/navbar"
 import Countdown from "./screens/countdown";
 import StoreSpin from "./screens/storeSpin";
+import AmSpin from "./screens/amSpin";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/" element={<Navigate to="/countdown" />} />
           <Route path="/countdown" element={<Countdown />} />
           <Route path="/storeSpin" element={<StoreSpin />} />
+          <Route path="/amSpin" element={<AmSpin />} />
         </Routes>
       </div>
     </Router>

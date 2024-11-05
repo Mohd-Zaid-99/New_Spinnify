@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
   font-family: Archivo !important;
+  color: #952953;
 }
 
 code {
@@ -92,17 +93,16 @@ code {
 }
 
 .parentContainer {
+  height: 100vh;
   background-image: url("./assets/04.jpg");
   background-size: contain;
-  min-height: 100vh;
-  height: fit-content;
   display: flex;
   flex-direction: column;
 }
 
 /* Main Container */
 .store-spin-container {
-  flex-basis: 100%;
+  flex-basis: 50%;
   min-height: 100vh;
   height: fit-content;
   display: flex;
@@ -132,11 +132,10 @@ code {
 
 .user-info {
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .user-info h2 {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
 }
 
@@ -183,16 +182,19 @@ code {
 .stat {
   background-color: #ffffff;
   border-radius: 10px;
-  height: 96px;
   padding: 0px 15px;
   text-align: center;
   width: 160px;
+  height: 113px;
 }
 
 .stat h3 {
   font-size: 66px;
-  margin: 0;
+  /* margin: 2px 0px; */
+  margin-top: 14px;
   line-height: 1;
+  font-family: "Exo", sans-serif;
+  letter-spacing: 4px;
 }
 
 .stat p {
@@ -203,15 +205,18 @@ code {
 }
 
 .spin-btn {
-  background-color: #12065e;
+  background-color: #52b688;
+  font-family: Archivo !important;
   color: #fff;
-  padding: 5px 20px;
+  padding: 10px 23px;
   font-weight: 500;
   font-size: 15px;
-  border-radius: 5px;
+  border-radius: 10px;
   text-decoration: none;
   display: inline-block;
   margin-top: 0px;
+  letter-spacing: 1px;
+  border: none;
 }
 
 .spin-btn:hover {
@@ -259,20 +264,23 @@ code {
   background-color: #f9e01a;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  height: 60px;
+  height: 90px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 15px 0px;
+  padding: 10px 0px;
 }
 
 .scrolling-content {
   display: flex;
   flex-direction: column;
   flex-basis: 95%;
-  overflow: hidden;
-  animation: scroll 10s linear infinite;
+  /* overflow: hidden; */
+}
+
+.scrolling-animation {
+  animation: scroll 60s linear infinite;
 }
 
 @keyframes scroll {
@@ -289,6 +297,7 @@ code {
 
 .storeParticipant {
   padding: 10px;
+  font-size: 20px;
   box-sizing: border-box;
 }
 
@@ -472,46 +481,30 @@ code {
 
 #swal2-html-container {
   padding: 3em 2.6em 0.3em !important;
+  z-index: 10001 !important;
 }
 
 .winner-box {
-  width: 30%;
-  height: 320px;
-  border-radius: 15px;
-  margin: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  border: 2px solid #00391c;
-  overflow: hidden;
-  max-height: 200px;
-  /* Limit the height of each box */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: red;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
   /* Add vertical scrollbar if content overflows */
 }
-
-.winner-header {
-  font-size: 24px;
-  font-weight: bold;
-  padding: 7px;
-  background-color: #286931;
-  border-top-left-radius: 14px;
-  border-top-right-radius: 14px;
-  color: #fff;
-  text-align: center;
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none !important; /* Make sure clicks go through to the popup */
+  z-index: 10000 !important; /* Set a z-index that places it above the popup */
 }
 
 .winner-list {
   font-size: 20px;
-  list-style-type: disc;
+  list-style-type: none;
   /* Bullet points for winner names */
-  padding-left: 20px;
+  padding-left: 10px;
   /* Indent bullets */
   margin: 15px;
-  max-height: 150px;
+  max-height: 170px;
   /* Limit the height of the list to prevent overflow */
   overflow-y: auto;
   overflow-y: scroll;
@@ -521,12 +514,107 @@ code {
   -ms-overflow-style: none;
   /* For Internet Explorer and Edge */
 }
-
+.winner-list li {
+  font-size: 19px;
+  margin-top: 10px;
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
 .winner-list::-webkit-scrollbar {
   display: none;
   /* For Chrome, Safari, and Opera */
 }
 
 .winner-container {
-  background-image: "";
+  flex-basis: 70%;
+  background-image: url("./assets/winnerBg.jpg");
+  background-size: contain;
+  background-position: center;
+}
+
+.rm-container {
+  margin: 0px 60px;
+  margin-bottom: 30px;
+  /* border: 2px solid #000; */
+  padding: 23px;
+  border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.rm-header {
+  text-align: center;
+  font-size: 18px;
+  font-family: sans-serif;
+  font-weight: 600;
+}
+.rm-header h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.spins-container {
+  padding-left: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  overflow: auto;
+  flex-wrap: wrap;
+}
+
+.winner-box {
+  margin: 10px 0;
+  border: 1px solid #999;
+  background-color: #f9e01a;
+  width: 30%;
+  height: 320px;
+  border-radius: 15px;
+  margin: 10px;
+  border: 2px solid #52b688;
+  overflow: hidden;
+  max-height: 240px;
+  /* Limit the height of each box */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.winner-header {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  padding: 7px;
+  background-color: #52b688;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  color: #fff;
+  text-align: center;
+}
+
+.winner-list li {
+  margin-left: 20px;
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.firework {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 10px; /* Size of the firework */
+  height: 10px; /* Size of the firework */
+  background: radial-gradient(circle, yellow, red);
+  border-radius: 50%;
+  animation: explode 1s forwards;
 }

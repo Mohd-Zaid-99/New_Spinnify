@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import confetti from "canvas-confetti";
-import CongratsImage from "../assets/07.jpg";
+import CongratsImage from "../assets/06.jpg";
 
-export default function StoreSpin() {
+export default function AmSpin() {
   const [isSpinClicked, setIsSpinClicked] = useState(false);
   const [angle, setAngle] = useState(0);
   const [wheelClass, setWheelClass] = useState("");
@@ -28,7 +28,7 @@ export default function StoreSpin() {
     try {
       console.log("allSpinCompleted", allSpinsCompleted);
       const response = await axios.get(
-        "http://localhost:8081/spin/spinnify/getStoreWinners"
+        "http://localhost:8081/spin/spinnify/getAmWinners"
       );
       const result = response.data;
       setData(result);
@@ -119,7 +119,7 @@ export default function StoreSpin() {
 
   const showWinnerPopup = () => {
     startConfetti();
-    const winners = currentRMData.storeWinners.slice(
+    const winners = currentRMData.amWinners.slice(
       spinCount * 3,
       spinCount * 3 + 3
     ); // Get winners for this spin
@@ -127,22 +127,23 @@ export default function StoreSpin() {
 
     Swal.fire({
       html: `
-    <div style="width: 100%; height: 70vh;display:flex;justify-content:center;z-index:-1 ">
-      <div style="display: flex; align-items: flex-end; justify-content: center;width:100%;height:100%;display: flex; background-image: url(${CongratsImage}); background-size: cover; background-position: center; background-repeat: no-repeat;
+    <div style="width: 100%; height: 70vh; display: flex; justify-content: center; z-index: -1;">
+      <div style="display: flex; align-items: flex-end; justify-content: center;width:100vw;height:100%;display: flex; background-image: url(${CongratsImage}); background-size: contain; background-position: center; background-repeat: no-repeat;
     flex-direction: column;">
-    <div style="width:50%;margin-top: 40px;">
-    ${winners
-      .map(
-        (winner) => `
-        <div style="margin: 19px 0px; color: #952953; font-size: 30px;font-weight:bolder">
-        ${winner.name} - ${winner.code}
+        <div style="width: 50%; margin-top: 40px;">
+          ${winners
+            .map(
+              (winner) => `
+              <div style="margin: 19px 0px; color: #952953; font-size: 30px; font-weight: bolder;">
+                ${winner.amName}
+              </div>
+              `
+            )
+            .join("")}
         </div>
-        `
-      )
-      .join("")}
       </div>
-      </div>
-    </div>`,
+    </div>
+  `,
       customClass: {
         popup: "zoom-in-popup",
         confirmButton: "custom-confirm-button",
@@ -150,11 +151,10 @@ export default function StoreSpin() {
       confirmButtonText: "OK",
       showConfirmButton: true,
       background: "transparent",
-      width: "100%", // Full width
-      height: "auto", // Set height to auto to minimize gaps
+      height: "100vh", // Auto height
+      width: "100vw",
       padding: "0", // No padding
-      backdrop: "rgba(0,0,0,0.8)", // Optional: adds a backdrop overlay
-      grow: "fullscreen", // Makes the popup grow to full screen
+      backdrop: "rgba(0,0,0,0.8)", // Dark backdrop overlay
       confirmButtonColor: "#952953",
     }).then((result) => {
       cancelAnimationFrame(confettiAnimationRef.current);
@@ -212,9 +212,7 @@ export default function StoreSpin() {
       spinCount + 1
     }</div>
     <ul class="winner-list">
-      ${winners
-        .map((winner) => `<li>${winner.name} - ${winner.code}</li>`)
-        .join("")}
+      ${winners.map((winner) => `<li>${winner.amName}</li>`).join("")}
     </ul>
   `;
 
@@ -260,7 +258,7 @@ export default function StoreSpin() {
             </div>
             <div className="stats">
               <div className="stat">
-                <h3>{String(currentRMData?.storeCount).padStart(3, "0")}</h3>
+                <h3>{String(currentRMData?.amCount).padStart(3, "0")}</h3>
                 <p>STORES</p>
               </div>
               <button className="spin-btn" onClick={handleSpinClick}>
@@ -291,12 +289,12 @@ export default function StoreSpin() {
             </div>
             <div
               className={`scrolling-content ${
-                currentRMData?.storeName.length > 8 ? "scrolling-animation" : ""
+                currentRMData?.amDetails.length > 8 ? "scrolling-animation" : ""
               }`}
             >
-              {currentRMData?.storeName.map((store, index) => (
+              {currentRMData?.amDetails.map((store, index) => (
                 <div className="storeParticipant" key={index}>
-                  {store.name} - {store.code}
+                  {store.amName}
                 </div>
               ))}
             </div>
