@@ -28,6 +28,9 @@ export default function AmSpin() {
   const spinningAudioRef = useRef(new Audio(spinSound));
   const winnerAudioRef = useRef(new Audio(winnerSound));
 
+  
+  const amImg = `${process.env.PUBLIC_URL}/RM/${currentRMData.amDetails.amUrl}`
+
   const fetchWinners = async () => {
     try {
       console.log("allSpinCompleted", allSpinsCompleted);
@@ -175,7 +178,7 @@ export default function AmSpin() {
     }).then((result) => {
       cancelAnimationFrame(confettiAnimationRef.current);
       confetti.reset();
-      
+
       winnerAudioRef.current.pause();
       winnerAudioRef.current.currentTime = 0;
 
@@ -317,7 +320,7 @@ export default function AmSpin() {
     }
   };  
 
-  const rmImg = `${process.env.PUBLIC_URL}/RM/Ghanshyam Chaudhari.jpg`
+  const rmImg = `${process.env.PUBLIC_URL}/RM/${currentRMData?.url}`
 
   return (
     <div className="parentContainer">
@@ -326,7 +329,7 @@ export default function AmSpin() {
           <div className="RM_info_container">
             <div className="user-info">
               <div className="circle">
-                {/* <img src={rmImg} alt="" className="profile-img"/> */}
+                <img src={rmImg} alt="" className="profile-img"/>
               </div>
               <h2>{currentRMData?.rmName}</h2>
             </div>

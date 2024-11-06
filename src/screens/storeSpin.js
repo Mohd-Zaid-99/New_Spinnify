@@ -296,6 +296,8 @@ export default function StoreSpin() {
     }
   };  
 
+  const rmImg = `${process.env.PUBLIC_URL}/RM/${currentRMData?.url}`
+
   return (
     <div className="parentContainer">
       <div className="store-spin-container">
@@ -303,6 +305,7 @@ export default function StoreSpin() {
           <div className="RM_info_container">
             <div className="user-info">
               <div className="circle">
+                <img src={rmImg} alt="" className="profile-img"/>
               </div>
               <h2>{currentRMData?.rmName}</h2>
             </div>
