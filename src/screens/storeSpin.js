@@ -108,11 +108,12 @@ export default function StoreSpin() {
 
   const showRMChangeAlert = () => {
     const currentRM = data[indexValue + 1]; // Get the next RM's data
+    const nextRmImg = `${process.env.PUBLIC_URL}/RM/${currentRM?.url}`
     Swal.fire({
       title: "Changing Regional Manager",
       html: `
       <div style="display: flex; align-items: center;flex-direction:column">
-        <img src="${Logo}" alt="Logo" style="width: 150px; height: 150px; border-radius: 50%; margin-right: 10px;" />
+        <img src="${nextRmImg}" alt="Logo" style="width: 150px; height: 150px; border-radius: 50%; margin-right: 10px;" />
         <span>You are now viewing <h2>${currentRM.rmName} </h2> </span>
       </div>
     `,

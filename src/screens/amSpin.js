@@ -28,9 +28,6 @@ export default function AmSpin() {
   const spinningAudioRef = useRef(new Audio(spinSound));
   const winnerAudioRef = useRef(new Audio(winnerSound));
 
-  
-  const amImg = `${process.env.PUBLIC_URL}/RM/${currentRMData.amDetails.amUrl}`
-
   const fetchWinners = async () => {
     try {
       console.log("allSpinCompleted", allSpinsCompleted);
@@ -113,11 +110,12 @@ export default function AmSpin() {
 
   const showRMChangeAlert = () => {
     const currentRM = data[indexValue + 1]; // Get the next RM's data
+    const nextRmImg = `${process.env.PUBLIC_URL}/RM/${currentRM?.url}`
     Swal.fire({
       title: "Changing Regional Manager",
       html: `
       <div style="display: flex; align-items: center;flex-direction:column">
-        <img src="${Logo}" alt="Logo" style="width: 150px; height: 150px; border-radius: 50%; margin-right: 10px;" />
+        <img src="${nextRmImg}" alt="Logo" style="width: 150px; height: 150px; border-radius: 50%; margin-right: 10px;" />
         <span>You are now viewing <h2>${currentRM.rmName} </h2> </span>
       </div>
     `,
@@ -128,6 +126,8 @@ export default function AmSpin() {
       },
     });
   };
+
+  // let amImg = `${process.env.PUBLIC_URL}/AM/${currentRMData.amDetails.amUrl}`;
 
   const showWinnerPopup = () => {
     startConfetti();
@@ -152,7 +152,7 @@ export default function AmSpin() {
             .map(
               (winner) => `
                       <div class="popup-image" style="text-align: center;">
-    <img src="${process.env.PUBLIC_URL}${winner.amUrl}"
+    <img src="${process.env.PUBLIC_URL}/AM/${winner.amUrl}"
          style="width: 240px;background:white; height: 240px; border-radius: 50%; border: 2px solid #952953; object-fit: cover;margin-top: 15px;" />
     <span style="font-weight: 700; display: block; text-align: center; color: #952953;font-size: 25px;margin-top: 15px;">${winner.amName} - ${winner.code}</span>
   </div>
@@ -239,10 +239,9 @@ export default function AmSpin() {
 <div style="display:flex;justify-content: space-evenly;align-items: center;height:100%">
   ${winners
     .map((winner) => {
-      const imageUrl = `${process.env.PUBLIC_URL}${winner.amUrl}`;
       return `
       <div style="display:flex;flex-direction:column;align-items:center;">
-        <img src="${imageUrl}" style="width: 120px;background:white; height: 120px; object-fit: cover;
+        <img src="${process.env.PUBLIC_URL}/AM/${winner.amUrl}" style="width: 120px;background:white; height: 120px; object-fit: cover;
         border-radius: 50%; border:2px solid #952953; object-position: center; margin-top: 15px;"
         />
         <span style="font-weight:700;text-align: center;margin-top: 5px;font-size:20px">
