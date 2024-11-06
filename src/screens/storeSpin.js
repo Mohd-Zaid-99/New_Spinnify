@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import confetti from "canvas-confetti";
 import CongratsImage from "../assets/07.jpg";
+import spinSound from "../assets/SpinSoundd.m4a"
+import winnerSound from "../assets/clapSound.wav"
 
 export default function StoreSpin() {
   const [isSpinClicked, setIsSpinClicked] = useState(false);
@@ -17,12 +19,12 @@ export default function StoreSpin() {
   const [spinCount, setSpinCount] = useState(0);
   const [spinContainers, setSpinContainers] = useState([]);
   const [currentWinnersLength, setCurrentWinnersLength] = useState();
-
   const [allSpinsCompleted, setAllSpinsCompleted] = useState(false);
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
   const confettiAnimationRef = useRef();
-  const spinningAudioRef = useRef(null);
+  const spinningAudioRef = useRef(new Audio(spinSound));
+  const winnerAudioRef = useRef(new Audio(winnerSound));
 
   const fetchWinners = async () => {
     try {
@@ -84,6 +86,8 @@ export default function StoreSpin() {
     setAngle(newAngle);
     setWheelClass("spinning");
 
+    spinningAudioRef.current.play();
+
     // End the spin after 21 seconds
     setTimeout(() => {
       setWheelClass("slowing");
@@ -94,6 +98,9 @@ export default function StoreSpin() {
     setTimeout(() => {
       setIsSpinClicked(false);
       setIsSpinning(false);
+
+      spinningAudioRef.current.pause();
+      spinningAudioRef.current.currentTime = 0;
 
       showWinnerPopup(); // Ensure the winner popup shows after spin
     }, 2100); // Total spin duration set to 21 seconds
@@ -119,6 +126,8 @@ export default function StoreSpin() {
 
   const showWinnerPopup = () => {
     startConfetti();
+    winnerAudioRef.current.play();
+
     const winners = currentRMData.storeWinners.slice(
       spinCount * 3,
       spinCount * 3 + 3
@@ -135,7 +144,7 @@ export default function StoreSpin() {
       .map(
         (winner) => `
         <div style="margin: 19px 0px; color: #952953; font-size: 30px;font-weight:bolder">
-        ${winner.name} - ${winner.code}
+        ${winner.name}
         </div>
         `
       )
@@ -159,6 +168,10 @@ export default function StoreSpin() {
     }).then((result) => {
       cancelAnimationFrame(confettiAnimationRef.current);
       confetti.reset();
+
+      winnerAudioRef.current.pause();
+      winnerAudioRef.current.currentTime = 0;
+
       if (result.isConfirmed) {
         createWinnerBox(winners);
         setSpinCount((prevCount) => prevCount + 1);
@@ -213,7 +226,7 @@ export default function StoreSpin() {
     }</div>
     <ul class="winner-list">
       ${winners
-        .map((winner) => `<li>${winner.name} - ${winner.code}</li>`)
+        .map((winner) => `<li>${winner.name}</li>`)
         .join("")}
     </ul>
   `;
@@ -337,7 +350,7 @@ export default function StoreSpin() {
             >
               {currentRMData?.storeName.map((store, index) => (
                 <div className="storeParticipant" key={index}>
-                  {store.name} - {store.code}
+                  {store.name}
                 </div>
               ))}
             </div>

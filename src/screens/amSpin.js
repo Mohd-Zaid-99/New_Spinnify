@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import confetti from "canvas-confetti";
 import CongratsImage from "../assets/AmWimmers.jpg";
+import spinSound from "../assets/SpinSoundd.m4a"
+import winnerSound from "../assets/clapSound.wav"
 
 export default function AmSpin() {
   const [isSpinClicked, setIsSpinClicked] = useState(false);
@@ -19,12 +21,12 @@ export default function AmSpin() {
   const [spinCount, setSpinCount] = useState(0);
   const [spinContainers, setSpinContainers] = useState([]);
   const [currentWinnersLength, setCurrentWinnersLength] = useState();
-
   const [allSpinsCompleted, setAllSpinsCompleted] = useState(false);
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
   const confettiAnimationRef = useRef();
-  const spinningAudioRef = useRef(null);
+  const spinningAudioRef = useRef(new Audio(spinSound));
+  const winnerAudioRef = useRef(new Audio(winnerSound));
 
   const fetchWinners = async () => {
     try {
@@ -86,6 +88,8 @@ export default function AmSpin() {
     setAngle(newAngle);
     setWheelClass("spinning");
 
+    spinningAudioRef.current.play();
+
     // End the spin after 21 seconds
     setTimeout(() => {
       setWheelClass("slowing");
@@ -96,6 +100,9 @@ export default function AmSpin() {
     setTimeout(() => {
       setIsSpinClicked(false);
       setIsSpinning(false);
+
+      spinningAudioRef.current.pause();
+      spinningAudioRef.current.currentTime = 0;
 
       showWinnerPopup(); // Ensure the winner popup shows after spin
     }, 2100); // Total spin duration set to 21 seconds
@@ -121,11 +128,13 @@ export default function AmSpin() {
 
   const showWinnerPopup = () => {
     startConfetti();
+    winnerAudioRef.current.play();
+
     const winners = currentRMData.amWinners.slice(
       spinCount * 3,
       spinCount * 3 + 3
     ); // Get winners for this spin
-    console.log("winnerssssss", winners);
+    // console.log("winnerssssss", winners);
 
     Swal.fire({
       html: `
@@ -166,6 +175,10 @@ export default function AmSpin() {
     }).then((result) => {
       cancelAnimationFrame(confettiAnimationRef.current);
       confetti.reset();
+      
+      winnerAudioRef.current.pause();
+      winnerAudioRef.current.currentTime = 0;
+
       if (result.isConfirmed) {
         createWinnerBox(winners);
         setSpinCount((prevCount) => prevCount + 1);
@@ -313,7 +326,7 @@ export default function AmSpin() {
           <div className="RM_info_container">
             <div className="user-info">
               <div className="circle">
-                <img src={rmImg} alt="" className="profile-img"/>
+                {/* <img src={rmImg} alt="" className="profile-img"/> */}
               </div>
               <h2>{currentRMData?.rmName}</h2>
             </div>
@@ -322,9 +335,6 @@ export default function AmSpin() {
                 <h3>{String(currentRMData?.amCount).padStart(3, "0")}</h3>
                 <p>Area Managers</p>
               </div>
-              {/* <button className="spin-btn" onClick={handleSpinClick}>
-                {allSpinsCompleted ? "DOWNLOAD" : "SPIN HERE"}
-              </button> */}
               {allSpinsCompleted ? (
                 <button className="spin-btn" onClick={downloadXlsx}>
                   DOWNLOAD
