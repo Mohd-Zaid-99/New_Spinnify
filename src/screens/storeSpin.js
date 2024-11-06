@@ -248,6 +248,11 @@ export default function StoreSpin() {
     })();
   };
 
+  const downloadXlsx = () => {
+    // Logic for downloading the winners data in XLSX format
+    console.log("Download XLSX file initiated");
+  };
+
   return (
     <div className="parentContainer">
       <div className="store-spin-container">
@@ -262,9 +267,15 @@ export default function StoreSpin() {
                 <h3>{String(currentRMData?.storeCount).padStart(3, "0")}</h3>
                 <p>STORES</p>
               </div>
-              <button className="spin-btn" onClick={handleSpinClick}>
-                {allSpinsCompleted ? "DOWNLOAD" : "SPIN HERE"}
-              </button>
+              {allSpinsCompleted ? (
+                <button className="spin-btn" onClick={downloadXlsx}>
+                  DOWNLOAD
+                </button>
+              ) : (
+                <button className="spin-btn" onClick={handleSpinClick}>
+                  SPIN HERE
+                </button>
+              )}
             </div>
           </div>
         ) : (
