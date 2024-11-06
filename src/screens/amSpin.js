@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Logo from "../assets/Logo.png";
 import Logo1 from "../assets/Logo11.png";
 import Congratsss from "../assets/CongratsBg.png";
-
 import spinnerImg from "../assets/Spin 01.png";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -143,7 +142,7 @@ export default function AmSpin() {
                       <div class="popup-image" style="text-align: center;">
     <img src="${process.env.PUBLIC_URL}${winner.amUrl}"
          style="width: 240px;background:white; height: 240px; border-radius: 50%; border: 2px solid #952953; object-fit: cover;margin-top: 15px;" />
-    <span style="font-weight: 700; display: block; text-align: center; color: #952953;font-size: 25px;margin-top: 15px;">${winner.amName}</span>
+    <span style="font-weight: 700; display: block; text-align: center; color: #952953;font-size: 25px;margin-top: 15px;">${winner.amName} - ${winner.code}</span>
   </div>
               `
             )
@@ -231,7 +230,7 @@ export default function AmSpin() {
         border-radius: 50%; border:2px solid #952953; object-position: center; margin-top: 15px;"
         />
         <span style="font-weight:700;text-align: center;margin-top: 5px;font-size:20px">
-          ${winner.amName}
+          ${winner.amName} - ${winner.code}
         </span>
       </div>
     `;
@@ -270,13 +269,52 @@ export default function AmSpin() {
     })();
   };
 
+  const downloadXlsx = async () => {
+    try {
+      const response = await axios.get("http://localhost:8081/spin/spinnify/downloadAmCsv");
+      if (response.data && response.data.data) {
+        const base64Data = response.data.data;
+        const byteCharacters = atob(base64Data);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], {
+          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        });
+  
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "AM_winners.xlsx";
+        document.body.appendChild(link);
+        link.click();
+  
+        // Clean up after download
+        URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+  
+        console.log("Download successful");
+      } else {
+        console.error("No data found to download");
+      }
+    } catch (error) {
+      console.error("Error downloading XLSX file:", error);
+    }
+  };  
+
+  const rmImg = `${process.env.PUBLIC_URL}/RM/Ghanshyam Chaudhari.jpg`
+
   return (
     <div className="parentContainer">
       <div className="store-spin-container">
         {!isSpinClicked ? (
           <div className="RM_info_container">
             <div className="user-info">
-              <div className="circle"></div>
+              <div className="circle">
+                <img src={rmImg} alt="" className="profile-img"/>
+              </div>
               <h2>{currentRMData?.rmName}</h2>
             </div>
             <div className="stats">
@@ -284,9 +322,18 @@ export default function AmSpin() {
                 <h3>{String(currentRMData?.amCount).padStart(3, "0")}</h3>
                 <p>Area Managers</p>
               </div>
-              <button className="spin-btn" onClick={handleSpinClick}>
+              {/* <button className="spin-btn" onClick={handleSpinClick}>
                 {allSpinsCompleted ? "DOWNLOAD" : "SPIN HERE"}
-              </button>
+              </button> */}
+              {allSpinsCompleted ? (
+                <button className="spin-btn" onClick={downloadXlsx}>
+                  DOWNLOAD
+                </button>
+              ) : (
+                <button className="spin-btn" onClick={handleSpinClick}>
+                  SPIN HERE
+                </button>
+              )}
             </div>
           </div>
         ) : (
@@ -317,7 +364,7 @@ export default function AmSpin() {
             >
               {currentRMData?.amDetails.map((store, index) => (
                 <div className="storeParticipant" key={index}>
-                  {store.amName}
+                  {store.amName} - {store.code}
                 </div>
               ))}
             </div>

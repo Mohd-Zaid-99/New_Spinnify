@@ -248,10 +248,40 @@ export default function StoreSpin() {
     })();
   };
 
-  const downloadXlsx = () => {
-    // Logic for downloading the winners data in XLSX format
-    console.log("Download XLSX file initiated");
-  };
+  const downloadXlsx = async () => {
+    try {
+      const response = await axios.get("http://localhost:8081/spin/spinnify/downloadStoreWinners");
+      if (response.data && response.data.data) {
+        const base64Data = response.data.data;
+        const byteCharacters = atob(base64Data);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], {
+          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        });
+  
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "store_winners.xlsx";
+        document.body.appendChild(link);
+        link.click();
+  
+        // Clean up after download
+        URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+  
+        console.log("Download successful");
+      } else {
+        console.error("No data found to download");
+      }
+    } catch (error) {
+      console.error("Error downloading XLSX file:", error);
+    }
+  };  
 
   return (
     <div className="parentContainer">
@@ -259,7 +289,8 @@ export default function StoreSpin() {
         {!isSpinClicked ? (
           <div className="RM_info_container">
             <div className="user-info">
-              <div className="circle"></div>
+              <div className="circle">
+              </div>
               <h2>{currentRMData?.rmName}</h2>
             </div>
             <div className="stats">
