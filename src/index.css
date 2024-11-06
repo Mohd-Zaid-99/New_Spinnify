@@ -608,13 +608,22 @@ canvas {
   }
 }
 
-.firework {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 10px; /* Size of the firework */
-  height: 10px; /* Size of the firework */
-  background: radial-gradient(circle, yellow, red);
-  border-radius: 50%;
-  animation: explode 1s forwards;
+.upperBody {
+  display: flex;
+  justify-content: space-between !important;
+  padding-top: 20px;
+  padding-right: 20px;
+  /* width: 90vw; */
+}
+
+.popup-container {
+  height: 65vh;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  /* For Firefox */
+  -ms-overflow-style: none;
+}
+.popup-container::-webkit-scrollbar {
+  display: none;
+  /* For Chrome, Safari, and Opera */
 }

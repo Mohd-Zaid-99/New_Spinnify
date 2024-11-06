@@ -106,7 +106,7 @@ export default function StoreSpin() {
       html: `
       <div style="display: flex; align-items: center;flex-direction:column">
         <img src="${Logo}" alt="Logo" style="width: 150px; height: 150px; border-radius: 50%; margin-right: 10px;" />
-        <span>You are now viewing <h2>MR. ${currentRM.rmName} </h2> </span>
+        <span>You are now viewing <h2>${currentRM.rmName} </h2> </span>
       </div>
     `,
       confirmButtonText: "OK",
@@ -192,7 +192,7 @@ export default function StoreSpin() {
       rmContainer.id = `rm-container-${indexValue}`;
       rmContainer.innerHTML = `
       <div class="rm-header">
-        <h2>MR.${currentRMData.rmName} - Regional Manager</h2>
+        <h2>${currentRMData.rmName} - Regional Manager</h2>
       </div>
       <div class="spins-container"></div>
     `;
@@ -255,8 +255,7 @@ export default function StoreSpin() {
           <div className="RM_info_container">
             <div className="user-info">
               <div className="circle"></div>
-              <h2>MR.{currentRMData?.rmName}</h2>
-              <p>Regional Manager - Karnataka</p>
+              <h2>{currentRMData?.rmName}</h2>
             </div>
             <div className="stats">
               <div className="stat">
@@ -287,7 +286,7 @@ export default function StoreSpin() {
           </div>
           <div className="storeParticipantList">
             <div className="storeParticipantListHeader">
-              <h3>Store Manager</h3>
+              <h3>Stores</h3>
             </div>
             <div
               className={`scrolling-content ${
