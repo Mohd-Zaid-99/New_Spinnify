@@ -8,8 +8,8 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import confetti from "canvas-confetti";
 import CongratsImage from "../assets/AmWimmers.jpg";
-import spinSound from "../assets/SpinSoundd.m4a"
-import winnerSound from "../assets/clapSound.wav"
+import spinSound from "../assets/SpinSoundd.m4a";
+import winnerSound from "../assets/clapSound.wav";
 
 export default function AmSpin() {
   const [isSpinClicked, setIsSpinClicked] = useState(false);
@@ -105,12 +105,12 @@ export default function AmSpin() {
       spinningAudioRef.current.currentTime = 0;
 
       showWinnerPopup(); // Ensure the winner popup shows after spin
-    }, 2100); // Total spin duration set to 21 seconds
+    }, 21000); // Total spin duration set to 21 seconds
   };
 
   const showRMChangeAlert = () => {
     const currentRM = data[indexValue + 1]; // Get the next RM's data
-    const nextRmImg = `${process.env.PUBLIC_URL}/RM/${currentRM?.url}`
+    const nextRmImg = `${process.env.PUBLIC_URL}/RM/${currentRM?.url}`;
     Swal.fire({
       title: "Changing Regional Manager",
       html: `
@@ -240,7 +240,7 @@ export default function AmSpin() {
   ${winners
     .map((winner) => {
       return `
-      <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="amWinnersBox" style="display:flex;flex-direction:column;align-items:center;" >
         <img src="${process.env.PUBLIC_URL}/AM/${winner.amUrl}" style="width: 120px;background:white; height: 120px; object-fit: cover;
         border-radius: 50%; border:2px solid #952953; object-position: center; margin-top: 15px;"
         />
@@ -286,7 +286,9 @@ export default function AmSpin() {
 
   const downloadXlsx = async () => {
     try {
-      const response = await axios.get("http://localhost:8081/spin/spinnify/downloadAmCsv");
+      const response = await axios.get(
+        "http://localhost:8081/spin/spinnify/downloadAmCsv"
+      );
       if (response.data && response.data.data) {
         const base64Data = response.data.data;
         const byteCharacters = atob(base64Data);
@@ -298,18 +300,18 @@ export default function AmSpin() {
         const blob = new Blob([byteArray], {
           type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         });
-  
+
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
         link.download = "AM_winners.xlsx";
         document.body.appendChild(link);
         link.click();
-  
+
         // Clean up after download
         URL.revokeObjectURL(url);
         document.body.removeChild(link);
-  
+
         console.log("Download successful");
       } else {
         console.error("No data found to download");
@@ -317,9 +319,9 @@ export default function AmSpin() {
     } catch (error) {
       console.error("Error downloading XLSX file:", error);
     }
-  };  
+  };
 
-  const rmImg = `${process.env.PUBLIC_URL}/RM/${currentRMData?.url}`
+  const rmImg = `${process.env.PUBLIC_URL}/RM/${currentRMData?.url}`;
 
   return (
     <div className="parentContainer">
@@ -328,7 +330,7 @@ export default function AmSpin() {
           <div className="RM_info_container">
             <div className="user-info">
               <div className="circle">
-                <img src={rmImg} alt="" className="profile-img"/>
+                <img src={rmImg} alt="" className="profile-img" />
               </div>
               <h2>{currentRMData?.rmName}</h2>
             </div>

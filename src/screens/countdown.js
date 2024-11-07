@@ -8,7 +8,7 @@ const Countdown = () => {
   const [timeLeft, setTimeLeft] = useState({
     hours: 0,
     minutes: 0,
-    seconds: 5,
+    seconds: 10,
   });
 
   useEffect(() => {

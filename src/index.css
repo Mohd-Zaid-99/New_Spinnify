@@ -161,12 +161,12 @@ code {
 }
 
 .profile-img {
-  width: 140px;
-  height: 140px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 0px;
+  left: 0px;
 }
 
 .stats {
@@ -446,7 +446,7 @@ code {
 
 /* Add spinning animation */
 .spinning {
-  animation: spiner 2s linear forwards;
+  animation: spiner 14s linear forwards;
 }
 
 /* Keyframes for spinning animation */
@@ -460,7 +460,7 @@ code {
 }
 
 .slowing {
-  animation: slowDown 5s linear forwards;
+  animation: slowDown 20s linear forwards;
 }
 
 /* Keyframes for slowing down the spinning */
@@ -527,6 +527,8 @@ canvas {
   /* For Chrome, Safari, and Opera */
 }
 
+/* Hide scrollbar */
+
 .winner-container {
   flex-basis: 70%;
   background-image: url("./assets/winnerBg.jpg");
@@ -580,6 +582,10 @@ canvas {
   justify-content: flex-start;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
+}
+
+.winner-box::-webkit-scrollbar {
+  display: none;
 }
 
 .winner-header {
